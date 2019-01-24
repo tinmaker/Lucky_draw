@@ -22,6 +22,8 @@ roll = RollLockydraw(namelists, ttf)
 roll2 = RollLockydraw(namelists, ttf)
 roll3 = RollLockydraw(namelists, ttf)
 roll.setsound("./music/sound1.wav")
+
+fpsclock = pygame.time.Clock()
 def func():
 	global count
 	global x
@@ -34,18 +36,18 @@ def func():
 	# 	x %= max_x
 	# 	y = max_x - x
 	count +=1
-	# if y<=3:
-	# 	if roll.getrolling()>3:
-	# 		y = 3
-	# 	elif roll.getrolling()<3:
-	# 		y = 0
-	# 		print ">:", roll.getptr()
-	# 		roll.remove(roll.getptrname())
-	# 		y = 40
+	if y<=3:
+		if roll.getrolling()>3:
+			y = 3
+		elif roll.getrolling()<3:
+			y = 0
+			print ">:", roll.getptr()
+			roll.remove(roll.getptrname())
+			y = 40
 	# 		print namelists
 	if y<=0:
 		y=0
-	y =2
+	# y =15
 	roll.rolling(y)
 	# roll2.rolling(y)
 	# roll3.rolling(y)
@@ -58,7 +60,7 @@ def main():
 	global bg
 	global bg2
 	while 1:
-		time.sleep(0.001)
+		# time.sleep(0.001)
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
 				print u'exit'
@@ -71,15 +73,15 @@ def main():
 				bg2 = pygame.transform.smoothscale(bg, SCREEN_SIZE)
 
 		# func()
-		if time.clock() - clock_old>=0.025:
-			clock_old = time.clock()
+		# if time.clock() - clock_old>=0.025:
+		# 	clock_old = time.clock()
 
 		screen.blit(bg2, (0, 0))
 
-			# func()
+		func()
 
 		pygame.display.update()
-
+		fpsclock.tick(40)
 		# print time.clock()
 		
 
