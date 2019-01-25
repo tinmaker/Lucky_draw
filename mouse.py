@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import pygame
 from sys import exit
+from pygame.locals import *
 
 pygame.init()
 screen = pygame.display.set_mode((300,200),0,32)
@@ -31,10 +32,8 @@ class Button(object):
         
         if self.isOver():
             screen.blit(self.imageDown, (x-w/2,y-h/2))
-            pygame.event.poll()
         else:
             screen.blit(self.imageUp, (x-w/2, y-h/2))
-
 
 button = Button(upImageFilename,downImageFilename, (150,100))
     
@@ -43,6 +42,12 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             exit()
+        if event.type == MOUSEBUTTONDOWN:
+            if button.isOver():
+                print "down"
+        if event.type == MOUSEBUTTONUP:
+            if button.isOver():
+                print "up"
     screen.fill((200, 200, 200))
     button.render()
     pygame.display.update()
